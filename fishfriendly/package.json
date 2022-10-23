@@ -1,0 +1,20 @@
+{
+  "name": "fishfriendly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "npm start"
+  },
+  "author": "Shresht Bhowmick and Nalin Mathur",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^21.2.0",
+    "vex-js": "^4.1.0"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "native-prompt": "^2.1.4"
+  }
+}

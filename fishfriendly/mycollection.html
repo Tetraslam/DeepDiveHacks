@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+<link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>FishFriendly | My Collection</title>
+    <script src="https://kit.fontawesome.com/319f45cac7.js" crossorigin="anonymous"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: {
+          'sans': ['Segoe UI'],
+        },
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2563eb;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #111827;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+  </style>
+</head>
+    
+  <body class="bg-blue-600">
+    
+<!--NAVBAR-->
+    <span
+      class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
+      onclick="openSidebar()"
+    >
+      <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
+    </span>
+    <div
+      style = "z-index: 100"class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
+    >
+      <div class="text-gray-100 text-xl">
+        <div class="p-2.5 mt-1 flex items-center">
+          <i class="fa-solid fa-fish"></i>
+          <h1 class="font-bold text-gray-200 text-[25px] ml-3">FishFriendly</h1>
+          <i
+            class="bi bi-x cursor-pointer ml-28 lg:hidden"
+            onclick="openSidebar()"
+          ></i>
+        </div>
+        <div class="my-2 bg-gray-600 h-[1px]"></div>
+      </div>
+      <div
+        class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white"
+      >
+        <i class="bi bi-search text-sm"></i>
+        <input
+          type="text"
+          placeholder="Search For A Card"
+          class="text-[15px] ml-4 w-full bg-transparent focus:outline-none"
+        />
+      </div>
+      <div
+        onclick = 'parent.location="./index.html"' class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+      >
+        <i class="bi bi-house-door-fill"></i>
+        <span class="text-[15px] ml-4 text-gray-200 font-bold">Home</span>
+      </div>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white" onClick="parent.location='impact.html'"
+      >
+      <i class="bi bi-bar-chart-fill"></i>
+        <span class="text-[15px] ml-4 text-gray-200 font-bold text-left">Visualize Your Impact On The Ocean</span>
+      
+      </div>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-blue-600 text-white" onClick="upgradecard1()"
+      >
+      <i class="bi bi-bar-chart-fill"></i>
+        <span class="text-[15px] ml-4 text-gray-200 font-bold text-left">My Collection</span>
+      
+      </div>
+      <div class="my-4 bg-gray-600 h-[1px]"></div>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        onclick="dropdown()"
+      >
+      <i class="bi bi-compass-fill"></i>
+        <div class="flex justify-between w-full items-center">
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Your Rooms</span>
+          <span class="text-sm rotate-180" id="arrow">
+            <i class="bi bi-chevron-down"></i>
+          </span>
+        </div>
+      </div>
+      <div
+        class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
+        id="submenu"
+      >
+      <div class="px-2.5 flex items-center">
+        
+        <h1 onClick="parent.location='kitchen.html'" class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+          Kitchen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </h1>
+        </div>
+        <div class="px-2.5 mt-1 flex items-center">
+        <h1  onClick="parent.location='bedroom.html'" class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+          Bedroom&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id = "bedroomMenu" class="fa-solid fa-lock"></i>&nbsp;&nbsp;
+        </h1>
+        </div>
+        <div class="px-2.5 mt-1 flex items-center">
+        <h1 onClick="parent.location='bathroom.html'" class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+          Bathroom&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id = "bathroomMenu" class="fa-solid fa-lock"></i>&nbsp;&nbsp;
+        </h1>
+        </div>
+      </div>
+      
+    </div>
+<!--END OF NAVBAR-->
+
+<!--PAGE CONTENT STARTS HERE-->
+<div class="container" class="rounded-lg border-6 border-white" style="z-index: 4;">
+<div style = "z-index: 10; padding-left: 320px; width: 99%; padding-right: 1%"class="rounded-lg absolute pt-5   lg:max-w-full lg:flex">
+  <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./1.png');" title="Coffee">
+  </div>
+  <div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+    <div class="mb-8">
+      <br>
+      
+      <div class="text-white font-bold text-2xl mb-2">Teabags</div>
+      <p class="text-white text-lg font-semibold font-large">Replace with: paper teabags, loose leaf tea</p>
+      <p class="text-white text-base">According to research, almost all of the 160 million tea bags consumed in the UK every day are made from single-use, non-recyclable plastic, which are composts which find their way into the oceans, polluting them. Most of the big-name brands, make their tea bags using plastic polymers that are the result of intensive chemical processes, which won’t biodegrade. It can be hard to avoid in a coffee shop: various sellers use non-biodegradable tea bags to make tea. But you can still make a difference at home.<br></p>
+    </div>
+    <button id ='card1button' class="button" onclick="upgradecard1()">
+      <!-- Orange Button -->
+      <div style = "z-index: 9" class="border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200">
+        I've replaced it!
+      </div>
+    </button>
+  </div>
+</div>
+</div>
+<div class="container" class="rounded-lg border-6 border-white">
+  <div style = "padding-left: 320px; width: 1500px; padding-top: 26%; z-index: 8;" class="rounded-lg relative   lg:max-w-full lg:flex">
+    <div id = 'locked1' class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./2.png'); filter: grayscale(100%); " title="Bottle">
+    </div>
+    <div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+      <div class="mb-8">
+        <br>
+        
+        <div class="text-white font-bold text-2xl mb-2">Glass</div>
+        <p class="text-white text-lg font-semibold font-large">Replace with: metal bottles</p>
+        <p class="text-white text-base">There are several issues with glass bottles. Mainly, if not disposed of correctly, they can cause injuries to humans and sea creatures alike. Fresh broken glass can be an issue to beach-goers who would have to watch their step. Broken glass can also harm the sea animals that may come across it. For example many hermit crabs use broken glass bottles as shells and end up with cuts or bruises around the edges of the bottle.<br></p>
+      </div>
+      <button id = 'card2button' class="button"  disabled onclick="upgradecard2()">
+        <!-- Orange Button -->
+        <div id = 'card2buttontext' class="z-index: 7; border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200" >
+          Unlock all previous cards first.
+        </div>
+      </button>
+    </div>
+  </div>
+  </div>
+  <div style = "padding-left: 320px; width: 99%; padding-right: 1%; padding-top: 1.6%; z-index: 8;"class="rounded-lg relative absolute   lg:max-w-full lg:flex" class="mt-5">
+    <div id = 'locked2' class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./3.png');filter: grayscale(100%); " title="Bottle">
+    </div>
+  <div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+    <div class="mb-8">
+      <br>
+      
+      <div class="text-white font-bold text-2xl mb-2">Food Wrappers</div>
+      <p class="text-white text-lg font-semibold font-large">Replace with: cloth bags, biodegradable paper bags</p>
+      <p class="text-white text-base">There are several issues with glass bottles. Mainly, if not disposed of correctly, they can cause injuries to humans and sea creatures alike. Fresh broken glass can be an issue to beach-goers who would have to watch their step. Broken glass can also harm the sea animals that may come across it. For example many hermit crabs use broken glass bottles as shells and end up with cuts or bruises around the edges of the bottle.<br></p>
+    </div>
+    <button id = 'card3button' class="button" disabled onclick="upgradecard3()">
+      <!-- Orange Button -->
+      <div id = 'card3buttontext' class="z-index: 7; border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200" onclick="upgradecard2()">
+        Unlock all previous cards first.
+      </div>
+    </button>
+  </div>
+</div>
+
+<div style = "padding-left: 320px; width: 99%; padding-right: 1%; padding-top: 1.6%; z-index: 8;"class="rounded-lg relative absolute   lg:max-w-full lg:flex" class="mt-5">
+  <div id = 'locked3' class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./4.png');filter: grayscale(100%); " title="Bottle">
+  </div>
+<div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+  <div class="mb-8">
+    <br>
+    
+    <div class="text-white font-bold text-2xl mb-2">Plastic Cutlery</div>
+    <p class="text-white text-lg font-semibold font-large">Replace with: metal cutlery</p>
+    <p class="text-white text-base">Fast food joints often offer food in plastics which are easy to dispose of. Plastic food dishes, straws, forks, and spoons are packaged together with the food to enable the customer to eat and then later dispose of the plastic cutlery. More than half the plastic used is thrown away without even being used, and a lot is wasted without being recycled. All this plastic ends up in the sea, and we already know the harmful effects of plastics in the sea.<br></p>
+  </div>
+  <button id = 'card4button' class="button" disabled onclick="upgradecard4()">
+    <!-- Orange Button -->
+    <div id = 'card4buttontext' class="z-index: 7; border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200" onclick="upgradecard3()">
+      Unlock all previous cards first.
+    </div>
+  </button>
+</div>
+</div>
+
+<div style = "padding-left: 320px; width: 99%; padding-right: 1%; padding-top: 1.6%; z-index: 8;"class="rounded-lg relative absolute   lg:max-w-full lg:flex" class="mt-5">
+  <div id = 'locked4' class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./5.png');filter: grayscale(100%); " title="Bottle">
+  </div>
+<div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+  <div class="mb-8">
+    <br>
+    
+    <div class="text-white font-bold text-2xl mb-2">Beverage Bottles</div>
+    <p class="text-white text-lg font-semibold font-large">Replace with: metal bottles (carry your own!) </p>
+    <p class="text-white text-base">Fast food joints often offer food in plastics which are easy to dispose of. Plastic food dishes, straws, forks, and spoons are packaged together with the food to enable the customer to eat and then later dispose of the plastic cutlery. More than half the plastic used is thrown away without even being used, and a lot is wasted without being recycled. All this plastic ends up in the sea, and we already know the harmful effects of plastics in the sea.<br></p>
+  </div>
+  <button id = 'card5button' class="button" disabled onclick="upgradecard5()">
+    <!-- Orange Button -->
+    <div id = 'card5buttontext' class="z-index: 7; border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200" onclick="upgradecard4()">
+      Unlock all previous cards first.
+    </div>
+  </button>
+</div>
+</div>
+
+<div style = "padding-left: 320px; width: 99%; padding-right: 1%; padding-top: 1.6%; z-index: 8;"class="rounded-lg relative absolute   lg:max-w-full lg:flex" class="mt-5">
+  <div id = 'locked5' class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./6.png');filter: grayscale(100%); " title="Bottle">
+  </div>
+<div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+  <div class="mb-8">
+    <br>
+    
+    <div class="text-white font-bold text-2xl mb-2">Cooking Oil</div>
+    <p class="text-white text-lg font-semibold font-large">Replace with: coconut oil </p>
+    <p class="text-white text-base"> Scientific research and experience with actual spills have shown that spills of animal fats and vegetable oils kill or injure wildlife and produce other undesirable effects. Wildlife that becomes coated with animal fats or vegetable oils could die of hypothermia, dehydration and diarrhea, or starvation. Aquatic life may suffocate because of the depletion of oxygen caused by spilled animal fats and vegetable oils in water. Spills of animal fats and vegetable oils have the same or similar devastating impacts on the aquatic environment as petroleum oils.<br></p>
+  </div>
+  <button id = 'card6button' class="button" disabled onclick="upgradecard6()">
+    <!-- Orange Button -->
+    <div id = 'card6buttontext' class="z-index: 7; border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200" onclick="upgradecard5()">
+      Unlock all previous cards first.
+    </div>
+  </button>
+</div>
+</div>
+<br>
+<br>
+</div>
+<!--END OF PAGE CONTENT-->
+    <script type="text/javascript">
+      function dropdown() {
+        document.querySelector("#submenu").classList.toggle("hidden");
+        document.querySelector("#arrow").classList.toggle("rotate-0");
+      }
+      dropdown();
+
+      function openSidebar() {
+        document.querySelector(".sidebar").classList.toggle("hidden");
+      }
+    </script>
+    <script>
+      const Store = require('electron-store');
+
+      const prompt = require('native-prompt')
+const hello = {
+  foo: {
+    type: 'number',
+    maximum: 100,
+    minimum: 1,
+    default: 50
+  }
+}
+
+const hellothere = new Store({hello});
+console.log(hellothere.get('foo'));
+const ElectronStore = require('electron-store');
+const signin = {
+  'username': 'default'
+}
+
+const os = require("os");
+const userInfo = os.userInfo();
+let uid = userInfo.username;
+console.log(uid);
+
+const card1store = require('electron-store');
+const card1 = {
+  unlocked: {
+    type: 'string',
+    default: 'true'
+  }
+}
+const card2store = require('electron-store')
+const card2 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+const card3store = require('electron-store')
+const card3 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card4store = require('electron-store')
+const card4 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card5store = require('electron-store')
+const card5 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card6store = require('electron-store')
+const card6 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card1handler = new card1store({card1});
+const card2handler = new card2store({card2});
+const card3handler = new card3store({card3});
+const card4handler = new card4store({card4});
+const card5handler = new card5store({card5});
+const card6handler = new card6store({card6});
+enableButton1()
+enableButton2()
+enableButton3()
+enableButton4()
+enableButton5()
+function enableButton1() {
+  console.log('enablerunning')
+  if (card2handler.get('unlocked') ==='true') {
+    document.getElementById('card2button').disabled = false;
+    document.getElementById('card2buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked1').style = "background-image: url('./2.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton2() {
+  console.log('enablerunning2')
+  if (card3handler.get('unlocked') ==='true') {
+    document.getElementById('card3button').disabled = false;
+    document.getElementById('card3buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked2').style = "background-image: url('./3.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton3() {
+  console.log('enablerunning3')
+  if (card4handler.get('unlocked') ==='true') {
+    document.getElementById('card4button').disabled = false;
+    document.getElementById('card4buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked3').style = "background-image: url('./4.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton4() {
+  console.log('enablerunning4')
+  if (card5handler.get('unlocked') ==='true') {
+    document.getElementById('card5button').disabled = false;
+    document.getElementById('card5buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked4').style = "background-image: url('./5.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton5() {
+  console.log('enablerunning5')
+  if (card6handler.get('unlocked') ==='true') {
+    document.getElementById('card6button').disabled = false;
+    document.getElementById('card6buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked5').style = "background-image: url('./6.png'); filter: grayscale(0%);"
+  }
+}
+card1handler.set('unlocked', 'true');
+console.log(card1handler.get('unlocked'));
+
+function upgradecard1() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  console.log('running')
+  if (card1handler.get('unlocked')==='false') {
+    console.log(card1handler.get('unlocked'))
+    card1handler.set('unlocked', 'true')
+    console.log(card1handler.get('unlocked'))
+    enableButton1()
+}
+else {
+  console.log(card1handler.get('unlocked'))
+  console.log(card2handler.get('unlocked'))
+  card2handler.set('unlocked', 'true')
+  console.log(card2handler.get('unlocked'))
+  enableButton1()
+}}
+
+
+function upgradecard2() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card2handler.get('unlocked')==='true') {
+
+    console.log(card3handler.get('unlocked'))
+    console.log(card2handler.get('unlocked'))
+    card3handler.set('unlocked', 'true')
+    console.log(card2handler.get('unlocked'))
+    console.log(card3handler.get('unlocked'))
+    enableButton2()
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+
+function upgradecard3() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card3handler.get('unlocked')==='true') {
+
+    console.log(card4handler.get('unlocked'))
+    console.log(card3handler.get('unlocked'))
+    card4handler.set('unlocked', 'true')
+    console.log(card4handler.get('unlocked'))
+    console.log(card4handler.get('unlocked'))
+    enableButton3()
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+
+function upgradecard4() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card4handler.get('unlocked')==='true') {
+
+    console.log(card5handler.get('unlocked'))
+    console.log(card4handler.get('unlocked'))
+    card5handler.set('unlocked', 'true')
+    console.log(card5handler.get('unlocked'))
+    console.log(card5handler.get('unlocked'))
+    enableButton4()
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+function openSidebar() {
+        document.querySelector(".sidebar").classList.toggle("hidden");
+      }
+function upgradecard5() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card5handler.get('unlocked')==='true') {
+
+    console.log(card6handler.get('unlocked'))
+    console.log(card5handler.get('unlocked'))
+    card6handler.set('unlocked', 'true')
+    console.log(card6handler.get('unlocked'))
+    console.log(card6handler.get('unlocked'))
+    enableButton5()
+    
+    
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+const bedroomStore = require('electron-store')
+const bedroomStorage = {
+  lock: {
+    type: 'string',
+    default: 'false'
+  }
+}
+const bedroomHandler = new bedroomStore({bedroomStorage});
+function bedroomUnlocker() {
+  console.log('remembered to unlock')
+  if (bedroomHandler.get('lock')==='true') {
+    document.getElementById('bedroomMenu').remove();
+  }
+}
+
+function upgradecard6() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  })
+  function dropdown() {
+        document.querySelector("#submenu").classList.toggle("hidden");
+        document.querySelector("#arrow").classList.toggle("rotate-0");
+        document.getElementById('bedroomMenu').remove();
+        bedroomHandler.set('lock', 'true');
+      }
+      dropdown();
+
+}
+
+function clearall() {
+  card1handler.set('unlocked', 'false');
+  card2handler.set('unlocked', 'false');
+  card3handler.set('unlocked', 'false');
+  card4handler.set('unlocked', 'false');
+  card5handler.set('unlocked', 'false');
+  bedroomHandler.set('lock', 'false');
+}
+
+
+
+
+/*if (username === 'User') {
+  prompt("Hello there! What should we call you?", "TunaMaster69420");
+}
+else {
+  document.getElementById("welcome").innerHTML = "Welcome Back, ", signedIn.get('username');
+
+}
+*/
+
+
+    </script>
+  </body>
+
+</html>

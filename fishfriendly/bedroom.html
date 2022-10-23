@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+<link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>FishFriendly | Bedroom</title>
+    <script src="https://kit.fontawesome.com/319f45cac7.js" crossorigin="anonymous"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2563eb;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #111827;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: {
+          'sans': ['Segoe UI'],
+        },
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+    
+  <body class="bg-blue-600">
+    
+<!--NAVBAR-->
+    <span
+      class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
+      onclick="openSidebar()"
+    >
+      <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
+    </span>
+    <div
+      style = "z-index: 100"class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
+    >
+      <div class="text-gray-100 text-xl">
+        <div class="p-2.5 mt-1 flex items-center">
+          <i class="fa-solid fa-fish"></i>
+          <h1 class="font-bold text-gray-200 text-[25px] ml-3">FishFriendly</h1>
+          <i
+            class="bi bi-x cursor-pointer ml-28 lg:hidden"
+            onclick="openSidebar()"
+          ></i>
+        </div>
+        <div class="my-2 bg-gray-600 h-[1px]"></div>
+      </div>
+      <div
+        class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white"
+      >
+        <i class="bi bi-search text-sm"></i>
+        <input
+          type="text"
+          placeholder="Search For A Card"
+          class="text-[15px] ml-4 w-full bg-transparent focus:outline-none"
+        />
+      </div>
+      <div
+        onclick = 'parent.location="./index.html"' class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+      >
+        <i class="bi bi-house-door-fill"></i>
+        <span class="text-[15px] ml-4 text-gray-200 font-bold">Home</span>
+      </div>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white" onClick="parent.location='impact.html'"
+      >
+      <i class="bi bi-bar-chart-fill"></i>
+        <span class="text-[15px] ml-4 text-gray-200 font-bold text-left">Visualize Your Impact On The Ocean</span>
+      
+      </div>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white" onClick="parent.location = './mycollection.html'"
+      >
+      <i class="bi bi-bar-chart-fill"></i>
+        <span class="text-[15px] ml-4 text-gray-200 font-bold text-left">My Collection</span>
+      
+      </div>
+      <div class="my-4 bg-gray-600 h-[1px]"></div>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        onclick="dropdown()"
+      >
+      <i class="bi bi-compass-fill"></i>
+        <div class="flex justify-between w-full items-center">
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Your Rooms</span>
+          <span class="text-sm rotate-180" id="arrow">
+            <i class="bi bi-chevron-down"></i>
+          </span>
+        </div>
+      </div>
+      <div
+        class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
+        id="submenu"
+      >
+      <div class="px-2.5 mt-1 flex items-center">
+        
+        <h1 onClick="parent.location='kitchen.html'" class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+          Kitchen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </h1>
+        </div>
+        <div class="px-2.5 mt-1 flex items-center">
+        <h1  onClick="parent.location='bedroom.html'" class="cursor-pointer p-2 bg-blue-600 rounded-md mt-1">
+          Bedroom&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </h1>
+        </div>
+        <div class="px-2.5 mt-1 flex items-center">
+        <h1 class="cursor-pointer p-2 hoverbg-blue-600 rounded-md mt-1">
+          Bathroom&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id = "bathroomMenu" class="fa-solid fa-lock"></i>&nbsp;&nbsp;
+        </h1>
+        </div>
+      </div>
+      
+    </div>
+<!--END OF NAVBAR-->
+
+<!--PAGE CONTENT STARTS HERE-->
+<div class="container" class="rounded-lg border-6 border-white" style="z-index: 4;">
+<div style = "z-index: 10; padding-left: 320px; width: 99%; padding-right: 1%"class="rounded-lg absolute pt-5   lg:max-w-full lg:flex">
+  <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./7.png');" title="Coffee">
+  </div>
+  <div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+    <div class="mb-8">
+      <br>
+      
+      <div class="text-white font-bold text-2xl mb-2">Laundry Detergent</div>
+      <p class="text-white text-lg font-semibold font-large">Replace with: bio-degradable detergent powders</p>
+      <p class="text-white text-base"> Detergents commonly contain phosphates which creates algae. Bleach is similarly very damaging to the ocean’s ecosystem. When chlorine bleach is put into the water system, it will mix with other minerals to create toxins. Instead of using bleach, use oxygen-based bleach or all-natural detergents and bleach alternatives.</p>
+    </div>
+    <button id ='card1button' class="button" onclick="upgradecard1()">
+      <!-- Orange Button -->
+      <div style = "z-index: 9" class="border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200">
+        I've replaced it!
+      </div>
+    </button>
+  </div>
+</div>
+</div>
+<div class="container" class="rounded-lg border-6 border-white">
+  <div style = "padding-left: 320px; width: 1500px; padding-top: 26%; z-index: 8;" class="rounded-lg relative   lg:max-w-full lg:flex">
+    <div id = 'locked1' class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('./8.png'); filter: grayscale(100%); " title="Cigarette">
+    </div>
+    <div class="rounded-lg border-white bg-gray-900 rounded-b lg:rounded-md lg:rounded-r p-8 flex flex-col justify-between leading-normal" style="border-radius: 2px; border-color: white;">
+      <div class="mb-8">
+        <br>
+        
+        <div class="text-white font-bold text-2xl mb-2">Cigarettes</div>
+        <p class="text-white text-lg font-semibold font-large">Replace with: nothing. Stop smoking.</p>
+        <p class="text-white text-base">The number one item found on the clear-up was cigarettes/ cigarette filters. Over 2,117,000 were found in the coastal clear-up. They make their way through drains and gutters and find themselves in the ocean. Animals and birds can mistake the butts for food and ingest them, along with the toxins present in cigarettes. So you should stop smoking cigarettes the betterment of sea creatures, if not for your own health.<br></p>
+      </div>
+      <button id = 'card2button' class="button"  disabled onclick="upgradecard2()">
+        <!-- Orange Button -->
+        <div id = 'card2buttontext' class="z-index: 7; border-2 border-blue-600 rounded-lg px-3 py-2 text-blue-400 cursor-pointer hover:bg-blue-600 hover:text-blue-200" >
+          Unlock all previous cards first.
+        </div>
+      </button>
+    </div>
+  </div>
+  </div>
+
+<!--END OF PAGE CONTENT-->
+    <script type="text/javascript">
+      function dropdown() {
+        document.querySelector("#submenu").classList.toggle("hidden");
+        document.querySelector("#arrow").classList.toggle("rotate-0");
+      }
+      dropdown();
+
+      function openSidebar() {
+        document.querySelector(".sidebar").classList.toggle("hidden");
+      }
+    </script>
+    <script>
+      const Store = require('electron-store');
+
+      const prompt = require('native-prompt')
+const hello = {
+  foo: {
+    type: 'number',
+    maximum: 100,
+    minimum: 1,
+    default: 50
+  }
+}
+
+const hellothere = new Store({hello});
+console.log(hellothere.get('foo'));
+const ElectronStore = require('electron-store');
+const signin = {
+  'username': 'default'
+}
+
+const os = require("os");
+const userInfo = os.userInfo();
+let uid = userInfo.username;
+console.log(uid);
+
+const card1store = require('electron-store');
+const card1 = {
+  unlocked: {
+    type: 'string',
+    default: 'true'
+  }
+}
+const card2store = require('electron-store')
+const card2 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+const card3store = require('electron-store')
+const card3 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card4store = require('electron-store')
+const card4 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card5store = require('electron-store')
+const card5 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card6store = require('electron-store')
+const card6 = {
+  unlocked: {
+    type: 'string',
+    default: 'false'
+  }
+}
+
+const card1handler = new card1store({card1});
+const card2handler = new card2store({card2});
+const card3handler = new card3store({card3});
+const card4handler = new card4store({card4});
+const card5handler = new card5store({card5});
+const card6handler = new card6store({card6});
+enableButton1()
+enableButton2()
+enableButton3()
+enableButton4()
+enableButton5()
+function enableButton1() {
+  console.log('enablerunning')
+  if (card2handler.get('unlocked') ==='true') {
+    document.getElementById('card2button').disabled = false;
+    document.getElementById('card2buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked1').style = "background-image: url('./8.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton2() {
+  console.log('enablerunning2')
+  if (card3handler.get('unlocked') ==='true') {
+    document.getElementById('card3button').disabled = false;
+    document.getElementById('card3buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked2').style = "background-image: url('./3.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton3() {
+  console.log('enablerunning3')
+  if (card4handler.get('unlocked') ==='true') {
+    document.getElementById('card4button').disabled = false;
+    document.getElementById('card4buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked3').style = "background-image: url('./4.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton4() {
+  console.log('enablerunning4')
+  if (card5handler.get('unlocked') ==='true') {
+    document.getElementById('card5button').disabled = false;
+    document.getElementById('card5buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked4').style = "background-image: url('./5.png'); filter: grayscale(0%);"
+  }
+}
+function enableButton5() {
+  console.log('enablerunning5')
+  if (card6handler.get('unlocked') ==='true') {
+    document.getElementById('card6button').disabled = false;
+    document.getElementById('card6buttontext').innerHTML = "I've replaced it!";
+    document.getElementById('locked5').style = "background-image: url('./6.png'); filter: grayscale(0%);"
+  }
+}
+card1handler.set('unlocked', 'true');
+console.log(card1handler.get('unlocked'));
+
+function upgradecard1() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  console.log('running')
+  if (card1handler.get('unlocked')==='false') {
+    console.log(card1handler.get('unlocked'))
+    card1handler.set('unlocked', 'true')
+    console.log(card1handler.get('unlocked'))
+    enableButton1()
+}
+else {
+  console.log(card1handler.get('unlocked'))
+  console.log(card2handler.get('unlocked'))
+  card2handler.set('unlocked', 'true')
+  console.log(card2handler.get('unlocked'))
+  enableButton1()
+}}
+
+
+function upgradecard2() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card2handler.get('unlocked')==='true') {
+
+    console.log(card3handler.get('unlocked'))
+    console.log(card2handler.get('unlocked'))
+    card3handler.set('unlocked', 'true')
+    console.log(card2handler.get('unlocked'))
+    console.log(card3handler.get('unlocked'))
+    enableButton2()
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+
+function upgradecard3() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card3handler.get('unlocked')==='true') {
+
+    console.log(card4handler.get('unlocked'))
+    console.log(card3handler.get('unlocked'))
+    card4handler.set('unlocked', 'true')
+    console.log(card4handler.get('unlocked'))
+    console.log(card4handler.get('unlocked'))
+    enableButton3()
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+
+function upgradecard4() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card4handler.get('unlocked')==='true') {
+
+    console.log(card5handler.get('unlocked'))
+    console.log(card4handler.get('unlocked'))
+    card5handler.set('unlocked', 'true')
+    console.log(card5handler.get('unlocked'))
+    console.log(card5handler.get('unlocked'))
+    enableButton4()
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+function openSidebar() {
+        document.querySelector(".sidebar").classList.toggle("hidden");
+      }
+function upgradecard5() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  }
+  )
+  if (card5handler.get('unlocked')==='true') {
+
+    console.log(card6handler.get('unlocked'))
+    console.log(card5handler.get('unlocked'))
+    card6handler.set('unlocked', 'true')
+    console.log(card6handler.get('unlocked'))
+    console.log(card6handler.get('unlocked'))
+    enableButton5()
+    
+    
+
+  }
+  else {
+    console.log('passed')
+  }
+}
+const bedroomStore = require('electron-store')
+const bedroomStorage = {
+  lock: {
+    type: 'string',
+    default: 'false'
+  }
+}
+const bedroomHandler = new bedroomStore({bedroomStorage});
+function bedroomUnlocker() {
+  console.log('remembered to unlock')
+  if (bedroomHandler.get('lock')==='true') {
+    document.getElementById('bedroomMenu').remove();
+  }
+}
+bedroomUnlocker()
+
+function upgradecard6() {
+  confetti({
+    particleCount: 150,
+    spread: 180
+  })
+  function dropdown() {
+        document.querySelector("#submenu").classList.toggle("hidden");
+        document.querySelector("#arrow").classList.toggle("rotate-0");
+        document.getElementById('bedroomMenu').remove();
+        bedroomHandler.set('lock', 'true');
+      }
+      dropdown();
+
+}
+dropdown()
+function clearall() {
+  card1handler.set('unlocked', 'false');
+  card2handler.set('unlocked', 'false');
+  card3handler.set('unlocked', 'false');
+  card4handler.set('unlocked', 'false');
+  card5handler.set('unlocked', 'false');
+}
+
+
+
+
+/*if (username === 'User') {
+  prompt("Hello there! What should we call you?", "TunaMaster69420");
+}
+else {
+  document.getElementById("welcome").innerHTML = "Welcome Back, ", signedIn.get('username');
+
+}
+*/
+
+
+    </script>
+  </body>
+
+</html>
