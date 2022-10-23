@@ -11,6 +11,7 @@ Store.initRenderer();
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    icon: './fish.ico',
     width: 1920,
     height: 1080,
     webPreferences: {

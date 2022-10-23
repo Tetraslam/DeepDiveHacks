@@ -52,7 +52,19 @@
     
   <body class="bg-blue-600">
     
-<!--NAVBAR-->
+<!--NAVBAR--><style>
+  div.copyright {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    z-index: 1000;
+    
+  }
+  </style>
+  <div class="copyright bg-blue-600/50 text-white p-5">
+    <p>Copyright &#169; 2022 Freeware Friends</p>
+  </div>
     <span
       class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
       onclick="openSidebar()"
@@ -93,7 +105,7 @@
         class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white" onClick="parent.location='impact.html'"
       >
       <i class="bi bi-bar-chart-fill"></i>
-        <span class="text-[15px] ml-4 text-gray-200 font-bold text-left">Visualize Your Impact On The Ocean</span>
+        <span class="text-[15px] ml-4 text-gray-200 font-bold text-left">Visualize Our Impact On The Ocean</span>
       
       </div>
       <div
