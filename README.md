@@ -1,3 +1,1 @@
-# DeepDiveHacks
-
-## Download the app from releases!
+# FishFriendly
